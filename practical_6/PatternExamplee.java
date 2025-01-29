@@ -1,4 +1,4 @@
-class PatternsExample {
+class PatternsExamplee {
     static void drawDiamond(int size) {
         // Top part of the pattern
         for (int row = 1; row <= size; row++) {
