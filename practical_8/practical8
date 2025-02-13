@@ -1,0 +1,49 @@
+public class Practical8 {
+    static void drawIncreasingStars(int totalRows, int currentRow) {
+        if (currentRow > totalRows) return;
+        System.out.println("*".repeat(currentRow)); // Using repeat() for simplicity
+        drawIncreasingStars(totalRows, currentRow + 1);
+    }
+
+    static void drawDecreasingStars(int currentRow) {
+        if (currentRow < 1) return;
+        System.out.println("*".repeat(currentRow));
+        drawDecreasingStars(currentRow - 1);
+    }
+
+    static void drawStarPyramid(int height) {
+        drawIncreasingStars(height, 1);
+        drawDecreasingStars(height - 1); // Avoid repeating the middle row
+    }
+
+    public static void drawTreeShape(int row, int width) {
+        if (row > width) return;
+        drawSpaces((width - row) / 2);
+        drawCharacters(row, "*");
+        System.out.println();
+        drawTreeShape(row + 2, width);
+    }
+
+    static void drawRightAngleTriangle(int row, int size) {
+        if (row > size) return;
+        drawSpaces(size - row);
+        drawCharacters(row, "*");
+        System.out.println();
+        drawRightAngleTriangle(row + 1, size);
+    }
+
+    static void drawSpaces(int count) {
+        System.out.print(" ".repeat(count));
+    }
+
+    static void drawCharacters(int count, String symbol) {
+        System.out.print(symbol.repeat(count));
+    }
+
+    public static void main(String[] args) {
+        drawStarPyramid(4);
+        drawTreeShape(1, 5);
+        drawRightAngleTriangle(1, 4);
+    }
+}
+
