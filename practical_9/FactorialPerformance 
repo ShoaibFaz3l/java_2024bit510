@@ -1,0 +1,102 @@
+
+
+
+
+
+public class StringPerformance {
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("You haven't provided the command line arguments");
+            return;
+        }
+
+        int num = Integer.parseInt(args[0]); 
+
+        long startTimeOfString = System.nanoTime();
+        String str = "Hello";
+        for (int i = 0; i <num; i++) {
+            str = str + " World";  
+        }
+        long endTimeOfString = System.nanoTime();
+        long timeString = endTimeOfString - startTimeOfString;
+
+        long startTimeOfBuffer = System.nanoTime();
+        StringBuffer stringBuffer = new StringBuffer("Hello");
+        for (int i = 0; i < num; i++) {
+            stringBuffer.append(" World");
+        }
+        long endTimeOfBuffer = System.nanoTime();
+        long timeBuffer = endTimeOfBuffer - startTimeOfBuffer;
+
+        long startTimeOfBuilder = System.nanoTime();
+        StringBuilder stringBuilder = new StringBuilder("Hello");
+        for (int i = 0; i < num; i++) {
+            stringBuilder.append(" World");
+        }
+        long endTimeOfBuilder = System.nanoTime();
+        long timeBuilder = endTimeOfBuilder - startTimeOfBuilder;
+
+        System.out.println("Operations: " + num);
+        System.out.println("Time taken by String: " + timeString );
+        System.out.println("Time taken by StringBuffer: " + timeBuffer );
+        System.out.println("Time taken by StringBuilder: " + timeBuilder );
+
+        if (timeString > timeBuffer && timeString > timeBuilder) {
+            System.out.println("String is the slowest.");
+        }
+        if (timeBuffer > timeBuilder) {
+            System.out.println("StringBuffer is slower than StringBuilder.");
+        } else {
+            System.out.println("StringBuilder is the fastest.");
+        }
+    }
+} 
+
+
+
+public class FactorialPerformance {
+    public static int factorial(int n) {
+        int fact = 1;
+        for (int i = 1; i <= n; i++) {
+            fact *= i;
+        }
+        return fact;
+    }
+
+    public static int factorial2(int n) {
+        if (n <= 1) {
+            return 1;
+        }
+        return n * factorial2(n - 1);
+    }
+
+    public static void main(String[] args) {
+        int size = 10000;
+        int[] numbers = new int[size];
+
+        for (int i = 0; i < size; i++) {
+            numbers[i] = (int) ((System.nanoTime() % 50) + 1);
+        }
+
+        long startIterative = System.nanoTime();
+        for (int num : numbers) {
+            factorial(num);
+        }
+        long timeIterative = System.nanoTime() - startIterative;
+
+        long startRecursive = System.nanoTime();
+        for (int num : numbers) {
+            factorial2(num);
+        }
+        long timeRecursive = System.nanoTime() - startRecursive;
+
+        System.out.println("Total time taken by Iterative factorial: " + timeIterative + " ns");
+        System.out.println("Total time taken by Recursive factorial: " + timeRecursive + " ns");
+
+        if (timeIterative < timeRecursive) {
+            System.out.println("Iterative method is faster.");
+        } else {
+            System.out.println("Recursive method is faster.");
+        }
+    }
+}
